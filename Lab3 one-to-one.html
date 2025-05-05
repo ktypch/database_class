@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lab3 one-to-one.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h3 id="start-sail">Start sail</h3>
+<pre class="hljs"><code><div>./vendor/bin/sail start
+</div></code></pre>
+<p>or</p>
+<p>start your application in Docker desktop by clicking on <strong>'start'</strong> action button.</p>
+<h3 id="compile-and-build-frontend-assets">Compile and build frontend assets</h3>
+<!-- Shell:      console, shell
+Bash:       bash, sh, zsh
+PowerShell: powershell, ps
+DOS:        dos, bat, cmd -->
+<!-- <span style="color:blue">some *blue* text</span>. -->
+<!-- <p>Some Markdown text with <span style="color:blue">some <em>blue</em> text</span>.</p> -->
+<!-- ```properties
+ ./vendor/bin/sail npm run dev
+``` -->
+<pre class="hljs"><code><div>./vendor/bin/sail npm run dev
+</div></code></pre>
+<h1 id="one-to-one">One to One</h1>
+<h2 id="define-userbio-model-and-migration">Define <code>UserBio</code> Model and Migration</h2>
+<ol>
+<li>
+<p>Create the UserBio Model</p>
+<blockquote>
+<p>./vendor/bin/sail artisan make:model UserBio -m</p>
+</blockquote>
+<p>This command creates a model file at app/Models/UserBio.php and a migration file in the database/migrations directory.</p>
+</li>
+<li>
+<p>Open <code>UserBio.php</code> and define the properties</p>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserBio</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Model</span>
+</span>{
+    <span class="hljs-keyword">protected</span> $table = <span class="hljs-string">'user_bios'</span>;
+
+    <span class="hljs-keyword">protected</span> $fillable = [
+        <span class="hljs-string">'user_id'</span>,
+        <span class="hljs-string">'bio'</span>,
+    ];
+
+    <span class="hljs-keyword">protected</span> $casts = [
+        <span class="hljs-string">'created_at'</span> =&gt; <span class="hljs-string">'datetime'</span>,
+        <span class="hljs-string">'updated_at'</span> =&gt; <span class="hljs-string">'datetime'</span>,
+    ];
+}
+</div></code></pre>
+<p>Note: The protected $casts property on a model is used to specify how attributes should be cast to native types when you access them. This can be useful for ensuring that you get the expected data type when you interact with the model attributes.</p>
+</li>
+<li>
+<p>Go to migration file for the <code>create_user_bios_table.php</code> and define the schema</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">up</span><span class="hljs-params">()</span>: <span class="hljs-title">void</span>
+</span>{
+    Schema::create(<span class="hljs-string">'user_bios'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(Blueprint $table)</span> </span>{
+        $table-&gt;id(); <span class="hljs-comment">// Auto-incrementing primary key</span>
+        $table-&gt;unsignedBigInteger(<span class="hljs-string">'user_id'</span>)-&gt;unique(); <span class="hljs-comment">// Foreign key to the users table where unsignedBigInteger is used to store only positive integers</span>
+        $table-&gt;text(<span class="hljs-string">'bio'</span>)-&gt;nullable(); 
+        $table-&gt;timestamps(); <span class="hljs-comment">// Adds created_at and updated_at columns</span>
+        $table-&gt;foreign(<span class="hljs-string">'user_id'</span>)-&gt;references(<span class="hljs-string">'id'</span>)-&gt;on(<span class="hljs-string">'users'</span>)-&gt;onDelete(<span class="hljs-string">'cascade'</span>);
+    });
+}
+</div></code></pre>
+</li>
+<li>
+<p>Run a migration file</p>
+<blockquote>
+<p>./vendor/bin/sail artisan migrate</p>
+</blockquote>
+<p>or use this if you would like to run a specific file</p>
+<blockquote>
+<p>./vendor/bin/sail artisan migrate --path=/database/migrations/YOUR_file.php</p>
+</blockquote>
+<p>Tip: To view actual SQL queries before you run them: <code>./vendor/bin/sail artisan migrate --pretend</code></p>
+</li>
+<li>
+<p>The result should be:</p>
+ <img src="./pics/21.png" width="700" border="1"/>
+</li>
+</ol>
+<h2 id="define-laravel-one-to-one-relationship">Define Laravel One to One Relationship</h2>
+<p>Since this is a one-to-one relationship, each User can have at most one UserBio. Similarly, each UserBio is associated with exactly one User.</p>
+<h3 id="method-1-explicitly-define">Method 1: Explicitly define</h3>
+<p>This method is slightly more explicit by indicating <strong>the return type</strong> of the relationship method:</p>
+<ol>
+<li>
+<p>Go to <code>User</code> model and add this line</p>
+<blockquote>
+<p>use Illuminate\Database\Eloquent\Relations\HasOne;</p>
+</blockquote>
+</li>
+<li>
+<p>Define <strong>HasOne</strong> relationship</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bio</span><span class="hljs-params">()</span>: <span class="hljs-title">HasOne</span>
+</span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">$this</span>-&gt;hasOne(UserBio::class, <span class="hljs-string">'user_id'</span>);
+}
+</div></code></pre>
+</li>
+<li>
+<p>Go to <code>UserBio</code> model and add this line</p>
+<blockquote>
+<p>use Illuminate\Database\Eloquent\Relations\BelongsTo;</p>
+</blockquote>
+  <!-- > use Illuminate\Database\Eloquent\Factories\HasFactory; -->
+</li>
+<li>
+<p>Define <strong>BelongsTo</strong> relationship (the inverse of the relationship)</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">user</span><span class="hljs-params">()</span>: <span class="hljs-title">BelongsTo</span>
+</span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">$this</span>-&gt;belongsTo(User::class, <span class="hljs-string">'user_id'</span>);
+}
+</div></code></pre>
+</li>
+</ol>
+<h3 id="method-2-without-type-hinting">Method 2: Without Type Hinting</h3>
+<p>This is the most common and straightforward way to define a 1-to-1 relationship:</p>
+<ol>
+<li>
+<p>Define <strong>HasOne</strong> relationship: Go to <code>User</code> model</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bio</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">$this</span>-&gt;hasOne(UserBio::class, <span class="hljs-string">'user_id'</span>);
+}
+</div></code></pre>
+</li>
+<li>
+<p>Define <strong>BelongsTo</strong> relationship: Go to <code>UserBio</code> model</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">user</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">$this</span>-&gt;belongsTo(User::class, <span class="hljs-string">'user_id'</span>);
+}
+</div></code></pre>
+</li>
+</ol>
+<h2 id="modify-usercontroller-controller">Modify <code>UserController</code> Controller</h2>
+<p>Modify a controller to handle the user bio actions</p>
+<p>When work with the currently authenticated user, you can use <strong>Auth::user()</strong> to retrieve the 'user instance'. This is particularly useful if the actions you're performing (e.g., showing, creating, editing, or deleting a user's bio) should be scoped to the currently logged-in user.</p>
+<ol>
+<li>Open the controller file <code>(app/Http/Controllers/UserController.php)</code></li>
+<li>Check if you have include this <code>use Illuminate\Support\Facades\Auth;</code></li>
+</ol>
+<!-- 3. Add this line (Make sure that required App\Models are included)
+    > use App\Models\User;
+
+    > use App\Models\UserBio; -->
+<ol start="3">
+<li>
+<p>Add the following methods:</p>
+<ul>
+<li>
+<p>Show the form for edit the user's bio</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">showBio</span><span class="hljs-params">()</span>
+</span>{
+    $user = Auth::user(); <span class="hljs-comment">// Retrieve the currently authenticated user</span>
+    $bio = $user-&gt;bio; <span class="hljs-comment">// Access the related bio for the user</span>
+    <span class="hljs-keyword">return</span> view(<span class="hljs-string">'profile.show-bio'</span>, compact(<span class="hljs-string">'user'</span>, <span class="hljs-string">'bio'</span>));
+}
+</div></code></pre>
+<p>Explaination:</p>
+<ul>
+<li>The hasOne relationship implies that each User has one corresponding UserBio. When you call <code>$user-&gt;bio</code>, Laravel automatically queries the user_bios table for the record that matches the user's id because of the <code>hasOne</code> relationship you defined in the User model (<code>public function bio()</code>)</li>
+<li>The <code>compact('user', 'bio')</code> function creates an associative array with user and bio as keys and their respective values. This array is passed to the <code>profile.show-bio</code> Blade view, making the user and bio data available in the view.</li>
+</ul>
+</li>
+<li>
+<p>Update the user's profile</p>
+<p>This method is designed to update the user's bio if it already exists or create a new bio if it doesn't.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">updateBio</span><span class="hljs-params">(Request $request)</span>
+</span>{
+    $user = Auth::user();
+    $bio = $user-&gt;bio;
+
+    $request-&gt;validate([
+        <span class="hljs-string">'bio'</span> =&gt; <span class="hljs-string">'required|string'</span>,
+    ]);
+    
+    <span class="hljs-keyword">if</span> ($bio) {
+        $bio-&gt;update([
+            <span class="hljs-string">'bio'</span> =&gt; $request-&gt;input(<span class="hljs-string">'bio'</span>),
+        ]); 
+    } <span class="hljs-keyword">else</span> {
+        $user-&gt;bio()-&gt;create([
+            <span class="hljs-string">'bio'</span> =&gt; $request-&gt;input(<span class="hljs-string">'bio'</span>),
+        ]);
+    }
+
+    <span class="hljs-keyword">return</span> redirect()-&gt;route(<span class="hljs-string">'profile.show-bio'</span>)
+                    -&gt;with(<span class="hljs-string">'status'</span>, <span class="hljs-string">'Bio updated successfully!'</span>);
+}
+</div></code></pre>
+<p>Explaination:</p>
+<ul>
+<li>In if-else statement: If the user already has a bio, the <code>update</code> method is called to update the existing bio with the new input. If the user does not have a bio, a new UserBio record is created using the <code>create</code> method $user-&gt;bio()-&gt;create([...]), which associates the new bio with the user.</li>
+<li>After updating or creating the bio, the method redirects the user back to the profile.show-bio route with a session flash message indicating that the bio was updated successfully.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="define-routes">Define Routes</h2>
+<p>Also add this line <code>use App\Http\Controllers\UserController;</code></p>
+<pre class="hljs"><code><div>Route::middleware(<span class="hljs-string">'auth'</span>)-&gt;group(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+
+    ...
+
+    <span class="hljs-comment">// Route to show the bio page</span>
+    Route::get(<span class="hljs-string">'/profile/bio'</span>, [UserController::class, <span class="hljs-string">'showBio'</span>])-&gt;name(<span class="hljs-string">'profile.show-bio'</span>);
+    <span class="hljs-comment">// Route to handle updating the bio</span>
+    Route::patch(<span class="hljs-string">'/profile/bio'</span>, [UserController::class, <span class="hljs-string">'updateBio'</span>])-&gt;name(<span class="hljs-string">'profile.update-bio'</span>);
+});
+</div></code></pre>
+<p>Explaination:</p>
+<ul>
+<li>Route Name: <code>profile.show-bio</code>: This is a named route. In Laravel, naming routes allows you to refer to them by name rather than hardcoding URLs. You can use this name in your code to generate URLs or redirect users.</li>
+</ul>
+<h2 id="create-or-modify-views">Create or Modify Views</h2>
+<h3 id="resourcesviewsprofilepartialsupdate-profile-information-formbladephp"><code>resources/views/profile/partials/update-profile-information-form.blade.php</code></h3>
+<ol>
+<li>
+<p>Show current bio</p>
+<pre class="hljs"><code><div>&lt;h4 <span class="hljs-class"><span class="hljs-keyword">class</span>="<span class="hljs-title">font</span>-<span class="hljs-title">medium</span> <span class="hljs-title">text</span>-<span class="hljs-title">blue</span>-900"&gt;
+    </span>{{ __(<span class="hljs-string">'Bio Information'</span>) }}
+&lt;/h4&gt;
+&lt;p <span class="hljs-class"><span class="hljs-keyword">class</span>="<span class="hljs-title">mt</span>-2"&gt;
+    </span>{{$user-&gt;bio-&gt;bio ?? <span class="hljs-string">'No bio available'</span>}}
+&lt;/p&gt;
+</div></code></pre>
+<p><img src="./pics/1.png" alt="pic"></p>
+</li>
+<li>
+<p>Add Manage Bio Button in <code>update-profile-information-form.blade.php</code></p>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"{{ route('profile.show-bio') }}"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 active:bg-blue-700 focus:outline-none focus:border-blue-700 focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150"</span>&gt;</span>
+    {{ __('Click to Manage Bio') }}
+<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+</div></code></pre>
+</li>
+</ol>
+<h3 id="resourcesviewsprofileshow-biobladephp"><code>resources/views/profile/show-bio.blade.php</code></h3>
+<pre class="hljs"><code><div>&lt;x-app-layout&gt;
+    &lt;x-slot name=<span class="hljs-string">"header"</span>&gt;
+        &lt;h2 <span class="hljs-class"><span class="hljs-keyword">class</span>="<span class="hljs-title">font</span>-<span class="hljs-title">semibold</span> <span class="hljs-title">text</span>-<span class="hljs-title">xl</span> <span class="hljs-title">text</span>-<span class="hljs-title">gray</span>-800 <span class="hljs-title">dark</span>:<span class="hljs-title">text</span>-<span class="hljs-title">gray</span>-200 <span class="hljs-title">leading</span>-<span class="hljs-title">tight</span>"&gt;
+            </span>{{ __(<span class="hljs-string">'Edit Bio'</span>) }}
+        &lt;/h2&gt;
+    &lt;/x-slot&gt;
+
+    &lt;div <span class="hljs-class"><span class="hljs-keyword">class</span>="<span class="hljs-title">py</span>-12"&gt;
+        &lt;<span class="hljs-title">div</span> <span class="hljs-title">class</span>="<span class="hljs-title">max</span>-<span class="hljs-title">w</span>-7<span class="hljs-title">xl</span> <span class="hljs-title">mx</span>-<span class="hljs-title">auto</span> <span class="hljs-title">sm</span>:<span class="hljs-title">px</span>-6 <span class="hljs-title">lg</span>:<span class="hljs-title">px</span>-8"&gt;
+            &lt;<span class="hljs-title">div</span> <span class="hljs-title">class</span>="<span class="hljs-title">bg</span>-<span class="hljs-title">white</span> <span class="hljs-title">dark</span>:<span class="hljs-title">bg</span>-<span class="hljs-title">gray</span>-800 <span class="hljs-title">overflow</span>-<span class="hljs-title">hidden</span> <span class="hljs-title">shadow</span>-<span class="hljs-title">sm</span> <span class="hljs-title">sm</span>:<span class="hljs-title">rounded</span>-<span class="hljs-title">lg</span>"&gt;
+                &lt;<span class="hljs-title">div</span> <span class="hljs-title">class</span>="<span class="hljs-title">p</span>-6 <span class="hljs-title">text</span>-<span class="hljs-title">gray</span>-900 <span class="hljs-title">dark</span>:<span class="hljs-title">text</span>-<span class="hljs-title">gray</span>-100"&gt;
+
+                    &lt;!-- <span class="hljs-title">Form</span> <span class="hljs-title">to</span> <span class="hljs-title">edit</span> <span class="hljs-title">bio</span> --&gt;
+                    &lt;<span class="hljs-title">form</span> <span class="hljs-title">method</span>="<span class="hljs-title">post</span>" <span class="hljs-title">action</span>="</span>{{ route(<span class="hljs-string">'profile.update-bio'</span>) }}<span class="hljs-string">" class="</span>mt<span class="hljs-number">-6</span> space-y<span class="hljs-number">-6</span><span class="hljs-string">"&gt;
+                        @csrf
+                        @method('patch')
+
+                        &lt;div&gt;
+                            &lt;x-input-label for="</span>bio<span class="hljs-string">" /&gt;
+                            &lt;textarea id="</span>bio<span class="hljs-string">" name="</span>bio<span class="hljs-string">" rows="</span><span class="hljs-number">5</span><span class="hljs-string">" class="</span>mt<span class="hljs-number">-1</span> block w-full border-gray<span class="hljs-number">-300</span> rounded-md shadow-sm dark:bg-gray<span class="hljs-number">-700</span> dark:text-gray<span class="hljs-number">-100</span><span class="hljs-string">" required&gt;{{ old('bio', $bio-&gt;bio ?? '') }}&lt;/textarea&gt;
+                            &lt;x-input-error class="</span>mt<span class="hljs-number">-2</span><span class="hljs-string">" :messages="</span>$errors-&gt;get(<span class="hljs-string">'bio'</span>)<span class="hljs-string">" /&gt;
+                        &lt;/div&gt;
+
+                        &lt;div class="</span>flex items-center gap<span class="hljs-number">-4</span><span class="hljs-string">"&gt;
+                            &lt;x-primary-button&gt;{{ __('Update Bio') }}&lt;/x-primary-button&gt;
+                        &lt;/div&gt;
+                    &lt;/form&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- SweetAlert2 JavaScript --&gt;
+    &lt;script src="</span>https:<span class="hljs-comment">//cdn.jsdelivr.net/npm/sweetalert2@11"&gt;&lt;/script&gt;</span>
+    &lt;script&gt;
+        document.addEventListener(<span class="hljs-string">'DOMContentLoaded'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+            @<span class="hljs-keyword">if</span> (session(<span class="hljs-string">'status'</span>))
+                Swal.fire({
+                    icon: <span class="hljs-string">'success'</span>,
+                    title: <span class="hljs-string">'Success'</span>,
+                    text: <span class="hljs-string">'{{ session('</span>status<span class="hljs-string">') }}'</span>,
+                    confirmButtonText: <span class="hljs-string">'OK'</span>
+                });
+            @<span class="hljs-keyword">endif</span>
+        });
+    &lt;/script&gt;
+&lt;/x-app-layout&gt;
+</div></code></pre>
+<p><img src="./pics/2.png" alt="pic"></p>
+<p>Explaination:</p>
+<p>When you click the &quot;Update Bio&quot; button in the form, the form submission is handled by the action attribute of the <code>&lt;form&gt;</code> element, which points to a <code>route('profile.update-bio')</code>. This route is associated with a controller method that processes the form data.</p>
+<pre class="hljs"><code><div>&lt;form method=<span class="hljs-string">"post"</span> action=<span class="hljs-string">"{{ route('profile.update-bio') }}"</span> <span class="hljs-class"><span class="hljs-keyword">class</span>="<span class="hljs-title">mt</span>-6 <span class="hljs-title">space</span>-<span class="hljs-title">y</span>-6"&gt;
+@<span class="hljs-title">csrf</span>
+@<span class="hljs-title">method</span>('<span class="hljs-title">patch</span>')
+&lt;!-- <span class="hljs-title">Bio</span> <span class="hljs-title">textarea</span> <span class="hljs-title">and</span> <span class="hljs-title">submit</span> <span class="hljs-title">button</span> --&gt;
+&lt;/<span class="hljs-title">form</span>&gt;
+</span></div></code></pre>
+<img src="./pics/15.png" alt="drawing" width="600" border="1"/>
+<p>And it will show you a success message in a dialog box.</p>
+<img src="./pics/14.png" alt="drawing" width="600" border="1"/>
+<h2 id="tip-returning-to-page">Tip: Returning to Page</h2>
+<p>If you would like the page returning to profile.edit.blade.php, you can modify function <code>updateBio()</code> in UserController. This ensures that after the bio is updated, the user is redirected back to the profile edit page, and a success message is flashed into the session.</p>
+<img src="./pics/16.png" alt="drawing" width="600" border="1"/>
+<p>Next, in the <code>profile.edit.blade.php</code> file, you can handle the session message and display the SweetAlert dialog box by adding the following script:</p>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://cdn.jsdelivr.net/npm/sweetalert2@11"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+    <span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">'DOMContentLoaded'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        @<span class="hljs-keyword">if</span> (session(<span class="hljs-string">'status'</span>))
+            Swal.fire({
+                <span class="hljs-attr">icon</span>: <span class="hljs-string">'success'</span>,
+                <span class="hljs-attr">title</span>: <span class="hljs-string">'Success'</span>,
+                <span class="hljs-attr">text</span>: <span class="hljs-string">'{{ session('</span>status<span class="hljs-string">') }}'</span>,
+                <span class="hljs-attr">confirmButtonText</span>: <span class="hljs-string">'OK'</span>
+            });
+        @endif
+    });
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</div></code></pre>
+<p>The result will be...</p>
+<img src="./pics/17.png" alt="drawing" width="600" border="1"/>
+<hr>
+<p>update: Jan-2025</p>
+<h1 id="lab-assignment-route">Lab Assignment: Route</h1>
+<p>Create two buttons:</p>
+<ol>
+<li><strong>BACK</strong>: Navigates the user back to their profile edit page upon clicking.</li>
+<li><strong>GO TO DASHBOARD</strong>: Redirects the user to their dashboard page when clicked.</li>
+</ol>
+<img src="./pics/32.png" alt="drawing" width="600" border="1"/>
+</body>
+</html>
