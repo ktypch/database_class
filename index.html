@@ -10,12 +10,20 @@
 
 <body>
     <div id="app">Loading...</div>
-    <script>
-        window.$docsify = {
-            name: 'My Lecture',
-            homepage: 'README.md'
-        }
-    </script>
+<script>
+  window.$docsify = {
+    name: 'My Lecture',
+    homepage: 'README.md',
+    loadSidebar: true,
+    loadNavbar: true,
+    auto2top: true,
+    notFoundPage: true,
+    onInit: function () {
+      console.log('Docsify initialized');  // <- add this
+    }
+  }
+</script>
+
 </body>
 
 </html>
